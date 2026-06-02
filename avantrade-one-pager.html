@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avantrade One-Pager Wireframe & High-Fi Mockup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .monospace {
+      font-family: 'Fira Code', monospace;
+    }
+    /* Blueprint paper grid background for wireframe mode */
+    .blueprint-bg {
+      background-size: 20px 20px;
+      background-image: 
+        linear-gradient(to right, rgba(220, 225, 235, 0.6) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(220, 225, 235, 0.6) 1px, transparent 1px);
+      background-color: #f8fafc;
+    }
+    /* Blueprint specific element overrides */
+    .wireframe-mode .blueprint-border {
+      border: 2px dashed #94a3b8 !important;
+      background-color: rgba(241, 245, 249, 0.7) !important;
+    }
+    .wireframe-mode .blueprint-text-muted {
+      color: #64748b !important;
+    }
+    .wireframe-mode .blueprint-fill {
+      fill: #e2e8f0 !important;
+      stroke: #64748b !important;
+    }
+    /* High fidelity overrides */
+    .hifi-mode .accent-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    .hifi-mode .button-gradient {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    }
+    .hifi-mode .card-shadow {
+      box-shadow: 0 10px 30px -10px rgba(2, 132, 199, 0.08);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
+
+  <header class="bg-slate-950 border-b border-slate-800 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="p-2 bg-sky-600 rounded-lg text-white font-extrabold text-xl tracking-tight">Av</div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight flex items-center gap-2">
+          Avantrade <span class="text-xs bg-slate-800 text-sky-400 px-2 py-0.5 rounded-full font-medium">B2B Core Wealth</span>
+        </h1>
+        <p class="text-xs text-slate-400">Interactive One-Pager Wireframe & Layout Planner</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="bg-slate-900 p-1 rounded-lg border border-slate-800 flex">
+        <button id="btn-wireframe" onclick="setViewMode('wireframe')" class="px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-800 text-sky-400 border border-slate-700">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2l5.447 2.724A1 1 0 0115 5.618v10.764a1 1 0 01-.553.894L9 20zM9 20v-8m6 8l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-.553-.894L15 2m0 18v-8M9 12l6-3"></path></svg>
+          Blueprint Wireframe
+        </button>
+        <button id="btn-hifi" onclick="setViewMode('hifi')" class="px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          High-Fi Preview
+        </button>
+      </div>
+
+      <button onclick="toggleAnnotations()" id="btn-annotations" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium border border-slate-700 flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        Toggle Layout Tips
+      </button>
+    </div>
+  </header>
+
+  <div class="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
+    
+    <aside class="w-full lg:w-[380px] shrink-0 bg-slate-950 border-r border-slate-800 flex flex-col overflow-y-auto p-6 space-y-6">
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">One-Pager Architecture</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          B2B decision-makers in banks scan pages rapidly. This wireframe is structure-optimized to keep total word count under <strong>300 words</strong> while emphasizing credibility and compliance.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-sky-500/50 transition-all cursor-pointer" onclick="scrollToSection('onepager-hero')">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-sky-400 monospace">01. HERO HOOK</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Scanned in 3s</span>
+          </div>
+          <h3 class="font-bold text-sm text-slate-100">Hook & Embedded Visual</h3>
+          <p class="text-xs text-slate-400 mt-1">Position Avantrade immediately as an "embeddable layer". The visual shows integration, not just UI screens.</p>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-sky-500/50 transition-all cursor-pointer" onclick="scrollToSection('onepager-pillars')">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-sky-400 monospace">02. VALUE PROPS</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Transparent Metrics</span>
+          </div>
+          <h3 class="font-bold text-sm text-slate-100">License CAPEX & Honesty Disclaimer</h3>
+          <p class="text-xs text-slate-400 mt-1">Clarifies software license structure while honestly addressing internal server/middleware readiness factors.</p>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-sky-500/50 transition-all cursor-pointer" onclick="scrollToSection('onepager-architecture')">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-sky-400 monospace">03. ARCHITECTURE DIAGRAM</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Technical proof</span>
+          </div>
+          <h3 class="font-bold text-sm text-slate-100">3-Tier Integration Visual</h3>
+          <p class="text-xs text-slate-400 mt-1">Shows how Avantrade sits securely between existing mobile interfaces and complex banking cores.</p>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-sky-500/50 transition-all cursor-pointer" onclick="scrollToSection('onepager-capabilities')">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-sky-400 monospace">04. PRODUCT SUITE</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Capabilities</span>
+          </div>
+          <h3 class="font-bold text-sm text-slate-100">Front vs. Back-Office</h3>
+          <p class="text-xs text-slate-400 mt-1">Restores balanced, technical feature comparison blocks covering the operational flow.</p>
+        </div>
+      </div>
+
+      <div class="bg-sky-950/40 p-4 rounded-xl border border-sky-900/60 text-xs text-sky-300">
+        <div class="flex gap-2 items-start">
+          <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div>
+            <span class="font-bold">Balanced Layout Strategy:</span> Presenting clear front-office client channels alongside deep-tech back-office operational engines proves full-lifecycle capability to both business and tech stakeholders.
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 bg-slate-900 p-4 md:p-8 overflow-y-auto flex justify-center">
+      
+      <div id="one-pager-container" class="wireframe-mode w-full max-w-[850px] bg-white text-slate-900 rounded-xl shadow-2xl transition-all duration-300 min-h-[1100px] flex flex-col justify-between overflow-hidden relative">
+        
+        <div id="grid-bg" class="absolute inset-0 blueprint-bg pointer-events-none transition-opacity duration-300"></div>
+
+        <div class="relative z-10 p-8 md:p-12 space-y-12">
+          
+          <div class="flex items-center justify-between border-b pb-6 blueprint-border transition-all duration-200">
+            <div class="flex items-center gap-3">
+              <div id="brand-logo" class="w-10 h-10 bg-slate-800 rounded flex items-center justify-center font-bold text-white text-lg transition-all duration-200">
+                AV
+              </div>
+              <div>
+                <h2 id="brand-name" class="font-extrabold text-xl tracking-tight text-slate-900 transition-all duration-200" contenteditable="true">Avantrade</h2>
+                <p class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Enterprise Wealth Infrastructure</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-full border text-slate-600 transition-all duration-200 blueprint-border">PRODUCT BRIEF</span>
+            </div>
+          </div>
+
+          <section id="onepager-hero" class="relative group">
+            <div class="annotation-badge absolute -top-3 -left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow z-20 pointer-events-none">
+              Hero Section: Punchy Tagline + Immediate Product Statement
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              <div class="md:col-span-7 space-y-4">
+                <span class="text-xs font-bold text-sky-600 uppercase tracking-widest block">ENTERPRISE WEALTH ORCHESTRATION ENGINE</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight" contenteditable="true">
+                  Orchestrate End-to-End Wealth Operations with Modular Enterprise Infrastructure
+                </h1>
+                <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                  Bypass legacy core bottlenecks and complex IT development cycles. <strong>Avantrade</strong> delivers a comprehensive, pre-built turnkey wealth solution optimized for Southeast Asian retail banks and financial institutions.
+                </p>
+                <div class="flex gap-3 pt-2">
+                  <a href="#contact" class="px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all inline-flex items-center gap-1.5 button-gradient">
+                    Accelerate Deployment
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  </a>
+                </div>
+              </div>
+              
+              <div class="md:col-span-5">
+                <div class="w-full aspect-[4/3] rounded-xl border-2 border-dashed border-slate-400 bg-slate-50 flex flex-col items-center justify-center p-4 text-center blueprint-border relative overflow-hidden transition-all duration-200">
+                  
+                  <div class="w-full space-y-2 opacity-80 hifi-visual hidden">
+                    <div class="flex items-center justify-between border-b pb-2 mb-2">
+                      <div class="w-1/3 h-3 bg-slate-300 rounded"></div>
+                      <div class="w-6 h-6 bg-sky-200 rounded-full"></div>
+                    </div>
+                    <div class="h-16 bg-sky-50 rounded-lg border border-sky-100 p-2 flex flex-col justify-between">
+                      <div class="w-1/2 h-2 bg-slate-300 rounded"></div>
+                      <div class="flex justify-between items-end">
+                        <div class="w-1/3 h-5 bg-sky-500 rounded"></div>
+                        <div class="w-10 h-3 bg-slate-300 rounded"></div>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                      <div class="h-8 bg-slate-100 rounded border border-slate-200"></div>
+                      <div class="h-8 bg-slate-100 rounded border border-slate-200"></div>
+                    </div>
+                  </div>
+
+                  <div class="wireframe-visual flex flex-col items-center">
+                    <svg class="w-8 h-8 text-slate-400 blueprint-text-muted mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="text-xs font-bold text-slate-500 monospace block blueprint-text-muted">[Visual: Seamless App Embed Mockup]</span>
+                    <span class="text-[10px] text-slate-400 block mt-1">Shows mobile banking UX natively rendering Avantrade widgets</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="onepager-pillars" class="relative group">
+            <div class="annotation-badge absolute -top-3 -left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow z-20 pointer-events-none">
+              Strategic Value Pillars: Tackles Procurement & Regulatory Roadblocks
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3 blueprint-border card-shadow transition-all duration-200 relative">
+                <div class="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center text-sky-600 font-bold text-sm">1</div>
+                <h3 class="font-bold text-base text-slate-900">Zero Software CAPEX*</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Protect initial software budgets. Shift platform software costs entirely to aligned transactional/AUM operational billing.
+                </p>
+              </div>
+
+              <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3 blueprint-border card-shadow transition-all duration-200">
+                <div class="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center text-sky-600 font-bold text-sm">2</div>
+                <h3 class="font-bold text-base text-slate-900">Turnkey Compliance</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Fully OJK and S-Invest integration ready. Meet strict local reporting, auditing, and regulatory standards on day one.
+                </p>
+              </div>
+
+              <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3 blueprint-border card-shadow transition-all duration-200">
+                <div class="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center text-sky-600 font-bold text-sm">3</div>
+                <h3 class="font-bold text-base text-slate-900">Modular API Docking</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Avoid full core rewrites. Easily hook lightweight, modular endpoints into your bank's active middleware framework.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="mt-4 p-3.5 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-500 leading-relaxed blueprint-border">
+              <span class="font-semibold text-slate-700">*Implementation Note:</span> While Avantrade eliminates upfront software license CAPEX, actual implementation timeline and system integrations remain dependent on the readiness of your core ledger architecture, middleware setups, and active hosting environments.
+            </div>
+          </section>
+
+          <section id="onepager-architecture" class="relative group bg-slate-50 p-6 rounded-xl border blueprint-border transition-all duration-200">
+            <div class="annotation-badge absolute -top-3 -left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow z-20 pointer-events-none">
+              Integration Flow: Proves technical ease to Bank CTOs
+            </div>
+
+            <div class="space-y-4">
+              <div class="text-center max-w-md mx-auto space-y-1">
+                <h3 class="font-bold text-base text-slate-900">Integrated Platform Flow</h3>
+                <p class="text-xs text-slate-500">Unifying consumer engagement channels with enterprise processing infrastructure.</p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-11 gap-2 items-center pt-4">
+                
+                <div class="md:col-span-3 p-3 bg-white border rounded-lg text-center shadow-sm blueprint-border flex flex-col justify-center min-h-[90px] transition-all duration-200">
+                  <span class="text-[10px] font-bold text-sky-600 uppercase tracking-widest">Client Portal</span>
+                  <p class="font-bold text-xs mt-1 text-slate-800">Mobile & Web Apps</p>
+                  <p class="text-[10px] text-slate-400 mt-1">Secure User UI Layer</p>
+                </div>
+
+                <div class="md:col-span-1 flex justify-center py-2 md:py-0">
+                  <svg class="w-6 h-6 text-slate-400 transform rotate-90 md:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+
+                <div class="md:col-span-3 p-3 bg-slate-900 text-white border rounded-lg text-center shadow-md blueprint-border flex flex-col justify-center min-h-[90px] transition-all duration-200 select-none relative overflow-hidden">
+                  <div class="absolute top-0 inset-x-0 h-1 bg-sky-500"></div>
+                  <span class="text-[9px] font-bold text-sky-400 uppercase tracking-widest">Avantrade API Platform</span>
+                  <p class="font-bold text-xs mt-1">Embedded Gateway</p>
+                  <p class="text-[10px] text-slate-300 mt-1">Transaction Routing & Security</p>
+                </div>
+
+                <div class="md:col-span-1 flex justify-center py-2 md:py-0">
+                  <svg class="w-6 h-6 text-slate-400 transform rotate-90 md:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+
+                <div class="md:col-span-3 p-3 bg-white border rounded-lg text-center shadow-sm blueprint-border flex flex-col justify-center min-h-[90px] transition-all duration-200">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Settlement & Custody</span>
+                  <p class="font-bold text-xs mt-1 text-slate-800">Core Systems & Backoffice</p>
+                  <p class="text-[10px] text-slate-400 mt-1">Clearing, Ledgers, Registries</p>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <section id="onepager-capabilities" class="relative group">
+            <div class="annotation-badge absolute -top-3 -left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow z-20 pointer-events-none">
+              Capabilities Suite: Structured comparison avoids cognitive load
+            </div>
+
+            <div class="space-y-6">
+              <div class="border-b pb-2">
+                <h3 class="font-extrabold text-lg text-slate-900 tracking-tight">Enterprise Wealth Infrastructure Capabilities</h3>
+                <p class="text-xs text-slate-500">Unifying front-office client channels with robust back-office operational ledger engines.</p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Front-Office Column -->
+                <div class="space-y-4">
+                  <div class="flex items-center gap-2 text-sky-600 font-bold text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span>FRONT-OFFICE CAPABILITIES</span>
+                  </div>
+                  
+                  <ul class="space-y-3">
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">Self-Service Portfolio Management</strong>
+                        <p class="text-[11px] text-slate-600">Empower retail clients to independently track asset allocations, trigger autonomous buy/sell/switch settlement instructions, and monitor portfolio performance metrics.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">Digital Onboarding & e-KYC</strong>
+                        <p class="text-[11px] text-slate-600">Seamless investor profiling, custom risk-scoring calculators, and automated account generation linked directly to S-Invest.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">RM Assist & Advisory Dashboards</strong>
+                        <p class="text-[11px] text-slate-600">Provide relationship managers with 360-degree client asset views, cross-selling alerts, and deep portfolio analytics.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Back-Office Column -->
+                <div class="space-y-4">
+                  <div class="flex items-center gap-2 text-slate-700 font-bold text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <span>BACK-OFFICE & OPS ENGINE</span>
+                  </div>
+
+                  <ul class="space-y-3">
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">Unified Asset Catalog</strong>
+                        <p class="text-[11px] text-slate-600">Configure multiple asset profiles including mutual funds, bonds, structured products, and bancassurance.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">Unit Registry & Reconciliation</strong>
+                        <p class="text-[11px] text-slate-600">Automate order book netting, CBS-to-IM transaction matching, and omnibus custody allocation checks to eliminate manual back-office tasks.</p>
+                      </div>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <div>
+                        <strong class="text-xs text-slate-900 block">Lombard Loans Module</strong>
+                        <p class="text-[11px] text-slate-600">Integrated dynamic credit limit calculations based on real-time client asset collateral valuation, boosting margin capabilities.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <footer id="contact" class="relative group bg-slate-950 text-white p-8 md:px-12 md:py-8 border-t border-slate-800 transition-all duration-200">
+          <div class="annotation-badge absolute -top-3 -left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow z-20 pointer-events-none">
+            High Conversion Call To Action: Clear Next Steps
+          </div>
+
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-1">
+              <h4 class="font-extrabold text-base tracking-tight text-white">Unlock Modern Wealth Services</h4>
+              <p class="text-xs text-slate-400">Configure your banking sandbox environment in less than 48 hours.</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <a href="mailto:sales@avantrade.com" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-lg text-center shadow transition-all flex items-center justify-center gap-1.5 button-gradient">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Request Sandbox Access
+              </a>
+              <div class="text-center md:text-left">
+                <a href="https://indivaragroup.com/" target="_blank" class="text-[11px] block text-slate-400 hover:text-sky-400 transition-all underline decoration-slate-700 hover:decoration-sky-400 monospace">indivaragroup.com</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    let currentMode = 'wireframe';
+    let showAnnotations = true;
+
+    function setViewMode(mode) {
+      const container = document.getElementById('one-pager-container');
+      const gridBg = document.getElementById('grid-bg');
+      const btnWireframe = document.getElementById('btn-wireframe');
+      const btnHifi = document.getElementById('btn-hifi');
+      const hifiVisuals = document.querySelectorAll('.hifi-visual');
+      const wireframeVisuals = document.querySelectorAll('.wireframe-visual');
+
+      currentMode = mode;
+
+      if (mode === 'wireframe') {
+        container.classList.add('wireframe-mode');
+        container.classList.remove('hifi-mode', 'bg-slate-900', 'text-slate-100');
+        container.classList.add('bg-white', 'text-slate-900');
+        gridBg.style.opacity = '1';
+
+        // Toggle buttons style
+        btnWireframe.className = "px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-800 text-sky-400 border border-slate-700";
+        btnHifi.className = "px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white";
+
+        // Toggle assets/visuals inside
+        hifiVisuals.forEach(el => el.classList.add('hidden'));
+        wireframeVisuals.forEach(el => el.classList.remove('hidden'));
+
+      } else {
+        container.classList.remove('wireframe-mode');
+        container.classList.add('hifi-mode', 'bg-white', 'text-slate-900');
+        gridBg.style.opacity = '0';
+
+        // Toggle buttons style
+        btnWireframe.className = "px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white";
+        btnHifi.className = "px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-800 text-sky-400 border border-slate-700";
+
+        // Toggle assets/visuals inside
+        hifiVisuals.forEach(el => el.classList.remove('hidden'));
+        wireframeVisuals.forEach(el => el.classList.add('hidden'));
+      }
+    }
+
+    // Toggle layout tips helper
+    function toggleAnnotations() {
+      const badges = document.querySelectorAll('.annotation-badge');
+      const btn = document.getElementById('btn-annotations');
+      showAnnotations = !showAnnotations;
+
+      badges.forEach(badge => {
+        if (showAnnotations) {
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      });
+
+      if (showAnnotations) {
+        btn.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Toggle Layout Tips`;
+      } else {
+        btn.innerHTML = `<span class="w-2 h-2 rounded-full bg-slate-600"></span> Toggle Layout Tips`;
+      }
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
